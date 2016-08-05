@@ -99,7 +99,7 @@ var ants = [ant1, ant2, ant3, ant4];
 function draw(ant) {
     // Redraw screen in black with alpha channel for fading
     canvas.getContext('2d')
-        .fillStyle = 'rgba(0, 0, 0, 0.008)';
+        .fillStyle = 'rgba(0, 0, 0, 0.004)';
     canvas.getContext('2d')
         .fillRect(0, 0, windowWidth, windowHeight);
 
