@@ -30,29 +30,29 @@ var Ant = function (x, y, dir, world) {
     this.x = x
     this.y = y;
     this.dir = dir;
-    this.green = 150;
-    this.red = 150;
-    this.blue = 150;
+    this.green = 155;
+    this.red = 55;
+    this.blue = 55;
 
     this.checkBounderies = function () {
+
+      if (this.x % 10 === 0) this.blue += 1;
+      if (this.y % 10 === 0) this.blue -= 1;
+
         if (this.x >= world.width) {
             this.x = 0;
-            this.blue += 50;
         }
 
         if (this.x < 0) {
             this.x = world.width - 1;
-            this.blue -= 50;
         }
 
         if (this.y >= world.height) {
             this.y = 0;
-            this.blue += 50;
         }
 
         if (this.y < 0) {
             this.y = world.height - 1;
-            this.blue -= 50;
         }
     }
 
@@ -90,9 +90,9 @@ var Ant = function (x, y, dir, world) {
 };
 
 var ant1 = new Ant(Math.round(world.width / 10 * 4) - 10, Math.round(world.height / 10 * 4) - 10, 1, world);
-var ant2 = new Ant(Math.round(world.width / 10 * 4) + 10, Math.round(world.height / 10 * 4) - 10, 1, world);
-var ant3 = new Ant(Math.round(world.width / 10 * 4) - 10, Math.round(world.height / 10 * 4) + 10, 2, world);
-var ant4 = new Ant(Math.round(world.width / 10 * 4) + 10, Math.round(world.height / 10 * 4) + 10, 2, world);
+var ant2 = new Ant(Math.round(world.width / 10 * 4) + 10, Math.round(world.height / 10 * 4) - 10, 2, world);
+var ant3 = new Ant(Math.round(world.width / 10 * 4) - 10, Math.round(world.height / 10 * 4) + 10, 3, world);
+var ant4 = new Ant(Math.round(world.width / 10 * 4) + 10, Math.round(world.height / 10 * 4) + 10, 4, world);
 
 var ants = [ant1, ant2, ant3, ant4];
 
@@ -112,7 +112,6 @@ function draw(ant) {
 }
 
 var tick = function () {
-    // Create kids
     ants.forEach(function (ant) {
         ant.nextTurn();
         draw(ant);
@@ -121,4 +120,4 @@ var tick = function () {
 };
 
 // Call function draw with an interval of ..
-setInterval(tick, 0.1);
+setInterval(tick, 1);
