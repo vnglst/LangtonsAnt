@@ -10,7 +10,7 @@ canvas.getContext('2d')
 canvas.getContext('2d')
     .fillRect(0, 0, windowWidth, windowHeight);
 
-var squareSize = 20;
+var squareSize = 10;
 
 var world = {
     width: Math.round(windowWidth / squareSize),
@@ -26,41 +26,45 @@ for (var i = 0; i < world.width; i++) {
 world.squares = squares;
 
 var Ant = function (x, y, dir, world) {
-    var self = this;
     var squares = world.squares;
     this.x = x
     this.y = y;
     this.dir = dir;
-    this.green = 255;
-    this.red = 0;
+    this.green = 150;
+    this.red = 150;
+    this.blue = 150;
 
-    this.checkBounderies = function() {
-      if (this.x >= world.width) {
-        this.x = 0;
-      }
+    this.checkBounderies = function () {
+        if (this.x >= world.width) {
+            this.x = 0;
+            this.blue += 50;
+        }
 
-      if (this.x < 0) {
-        this.x = world.width - 1;
-      }
+        if (this.x < 0) {
+            this.x = world.width - 1;
+            this.blue -= 50;
+        }
 
-      if (this.y >= world.height) {
-        this.y = 0;
-      }
+        if (this.y >= world.height) {
+            this.y = 0;
+            this.blue += 50;
+        }
 
-      if (this.y < 0) {
-        this.y = world.height - 1;
-      }
+        if (this.y < 0) {
+            this.y = world.height - 1;
+            this.blue -= 50;
+        }
     }
 
     this.nextTurn = function () {
-        if (squares[this.x][self.y]) {
-            squares[self.x][self.y] = 0
-            self.turnLeft();
+        if (squares[this.x][this.y]) {
+            squares[this.x][this.y] = 0
+            this.turnLeft();
         } else {
-            squares[self.x][self.y] = 1;
-            self.turnRight();
+            squares[this.x][this.y] = 1;
+            this.turnRight();
         }
-        self.move();
+        this.move();
     }
 
     this.move = function () {
@@ -85,22 +89,22 @@ var Ant = function (x, y, dir, world) {
     };
 };
 
-var ant1 = new Ant(Math.round(world.width / 10 * 4), Math.round(world.height / 10 * 4), 1, world);
-var ant2 = new Ant(Math.round(world.width / 10 * 4), Math.round(world.height / 10 * 4), 2, world);
-var ant3 = new Ant(Math.round(world.width / 10 * 4) + 1, Math.round(world.height / 10 * 4), 1, world);
-var ant4 = new Ant(Math.round(world.width / 10 * 4) + 1, Math.round(world.height / 10 * 4), 2, world);
+var ant1 = new Ant(Math.round(world.width / 10 * 4) - 10, Math.round(world.height / 10 * 4) - 10, 1, world);
+var ant2 = new Ant(Math.round(world.width / 10 * 4) + 10, Math.round(world.height / 10 * 4) - 10, 1, world);
+var ant3 = new Ant(Math.round(world.width / 10 * 4) - 10, Math.round(world.height / 10 * 4) + 10, 2, world);
+var ant4 = new Ant(Math.round(world.width / 10 * 4) + 10, Math.round(world.height / 10 * 4) + 10, 2, world);
 
 var ants = [ant1, ant2, ant3, ant4];
 
 function draw(ant) {
     // Redraw screen in black with alpha channel for fading
     canvas.getContext('2d')
-        .fillStyle = 'rgba(0, 0, 0, 0.01)';
+        .fillStyle = 'rgba(0, 0, 0, 0.008)';
     canvas.getContext('2d')
         .fillRect(0, 0, windowWidth, windowHeight);
 
     var squareSize = world.squareSize;
-    var antColor = 'rgb(' + ant.red + ', ' + ant.green + ', 0)';
+    var antColor = 'rgb(' + ant.red + ', ' + ant.green + ', ' + ant.blue + ')';
     canvas.getContext('2d')
         .fillStyle = antColor;
     canvas.getContext('2d')
@@ -117,4 +121,4 @@ var tick = function () {
 };
 
 // Call function draw with an interval of ..
-setInterval(tick, 0.03);
+setInterval(tick, 0.1);
