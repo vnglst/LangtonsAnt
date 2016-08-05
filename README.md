@@ -1,11 +1,13 @@
 # Install
-
-npm install
-
+```
+$ npm install
+```
 # Develop
-
-npm start
-
-# Deploy to surge.sh
-
-npm run deploy
+```
+$ npm start
+```
+# Deploy
+```
+$ npm run deploy
+```
+Deploys to ants.koenvangilst.nl using surge.sh
