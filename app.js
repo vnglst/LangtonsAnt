@@ -30,7 +30,7 @@ var Ant = function (x, y, dir, world) {
     this.x = x
     this.y = y;
     this.dir = dir;
-    this.green = 155;
+    this.green = 255;
     this.red = 55;
     this.blue = 55;
 
